@@ -1,7 +1,6 @@
 <template>
   <div class="inputBox shadow">
     <input type="text" v-model="newTodoItem" v-on:keyup.enter="addTodo">
-<!--    <button v-on:click="addTodo">add</button>-->
     <span class="addContainer" v-on:click="addTodo">
       <i class="fa-solid fa-plus addBtn"></i>
     </span>
@@ -19,8 +18,14 @@ export default {
   },
   methods: {
     addTodo() {
-      localStorage.setItem(this.newTodoItem, this.newTodoItem); // 로컬스토리지 - MDN 참고
-      this.clearInput();
+      if(this.newTodoItem !== ''){
+        let obj = {
+          completed: false,
+          item: this.newTodoItem,
+        };
+        localStorage.setItem(this.newTodoItem, JSON.stringify(obj)); // 로컬스토리지 - MDN 참고
+        this.clearInput();
+      }
     },
     clearInput() {
       this.newTodoItem = '';

@@ -1,9 +1,13 @@
 <template>
   <div>
     <ul>
-      <li class="shadow" v-for="(item, index) in todoItems" v-bind:key="item">
-        {{item}}
-        <span class="removeBtn" v-on:click="removeTodo(item, index)">
+      <li class="shadow" v-for="(todoItem, index) in todoItems" v-bind:key="todoItem.item">
+        <span class="checkBtn" v-bind:class="{checkBtnCompleted: todoItem.completed}" v-on:click="toggleComplete(todoItem)">
+          <i class="fa-solid fa-square-check"></i>
+        </span>
+
+        <span v-bind:class="{textCompleted: todoItem.completed}">{{todoItem.item}}</span>
+        <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
           <i class="fa-solid fa-trash"></i>
         </span>
       </li>
@@ -24,7 +28,8 @@ export default {
     // console.log('created');
     if( localStorage.length>0){
       for (let i = 0; i < localStorage.length; i++) {
-        this.todoItems.push(localStorage.key(i));
+        let parseItem = JSON.parse(localStorage.getItem(localStorage.key(i)));
+        this.todoItems.push(parseItem);
       }
     }
   },
@@ -32,16 +37,23 @@ export default {
     removeTodo(item, index) {
       console.log(item);
       console.log(index);
-      localStorage.removeItem(item); // key, value가 동일할 때만
+      localStorage.removeItem(item.item); // key, value가 동일할 때만
       this.todoItems.splice(index, 1); // slice와 혼동 주의
-    }
+    },
+    toggleComplete(todoItem) {
+      todoItem.completed = !todoItem.completed;
+      // localStorage 는 삭제/추가로 업데이트해야 함.
+      localStorage.removeItem(todoItem.item);
+      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+    },
+
   },
 
 
 }
 </script>
 
-<style>
+<style scoped>
 ul {
   list-style-type: none;
   padding-left: 0px;
