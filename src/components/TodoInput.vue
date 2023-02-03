@@ -19,11 +19,7 @@ export default {
   methods: {
     addTodo() {
       if(this.newTodoItem !== ''){
-        let obj = {
-          completed: false,
-          item: this.newTodoItem,
-        };
-        localStorage.setItem(this.newTodoItem, JSON.stringify(obj)); // 로컬스토리지 - MDN 참고
+        this.$emit('addTodoItem', this.newTodoItem); // $emit은 이벤트 발생. -> addTodoItem이라는 이벤트를 하위 컴포넌트에서 상위 컴포넌트로 발생시켰다.
         this.clearInput();
       }
     },
