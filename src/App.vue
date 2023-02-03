@@ -2,7 +2,7 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <TodoInput v-on:addTodoItem="addOneItem"></TodoInput>
-    <TodoList v-bind:propsdata="todoItems"></TodoList>
+    <TodoList v-bind:propsdata="todoItems" v-on:removeItem="removeOneItem"></TodoList>
     <TodoFooter></TodoFooter>
   </div>
 </template>
@@ -25,7 +25,10 @@ export default {
       localStorage.setItem(todoItem, JSON.stringify(obj)); // 로컬스토리지 - MDN 참고
       this.todoItems.push(obj);
     },
-
+    removeOneItem(item, index) {
+      localStorage.removeItem(item.item); // key, value가 동일할 때만
+      this.todoItems.splice(index, 1); // slice와 혼동 주의
+    },
   },
   created() {
     console.log('created');

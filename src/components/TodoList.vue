@@ -21,10 +21,7 @@ export default {
   props: ['propsdata'],
   methods: {
     removeTodo(item, index) {
-      console.log(item);
-      console.log(index);
-      localStorage.removeItem(item.item); // key, value가 동일할 때만
-      this.todoItems.splice(index, 1); // slice와 혼동 주의 FIXME
+      this.$emit('removeItem', item, index);
     },
     toggleComplete(todoItem) {
       todoItem.completed = !todoItem.completed;
