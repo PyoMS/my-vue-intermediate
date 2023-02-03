@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul>
-      <li class="shadow" v-for="(todoItem, index) in todoItems" v-bind:key="todoItem.item">
+      <li class="shadow" v-for="(todoItem, index) in propsdata" v-bind:key="todoItem.item">
         <span class="checkBtn" v-bind:class="{checkBtnCompleted: todoItem.completed}" v-on:click="toggleComplete(todoItem)">
           <i class="fa-solid fa-square-check"></i>
         </span>
@@ -18,27 +18,13 @@
 <script>
 export default {
   name: "TodoList",
-  data() {
-    return {
-      todoItems: [],
-
-    };
-  },
-  created() {
-    // console.log('created');
-    if( localStorage.length>0){
-      for (let i = 0; i < localStorage.length; i++) {
-        let parseItem = JSON.parse(localStorage.getItem(localStorage.key(i)));
-        this.todoItems.push(parseItem);
-      }
-    }
-  },
+  props: ['propsdata'],
   methods: {
     removeTodo(item, index) {
       console.log(item);
       console.log(index);
       localStorage.removeItem(item.item); // key, value가 동일할 때만
-      this.todoItems.splice(index, 1); // slice와 혼동 주의
+      this.todoItems.splice(index, 1); // slice와 혼동 주의 FIXME
     },
     toggleComplete(todoItem) {
       todoItem.completed = !todoItem.completed;
