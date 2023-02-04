@@ -57,7 +57,6 @@ export default {
     'TodoInput': TodoInput,
     'TodoList': TodoList,
     'TodoFooter': TodoFooter,
-
   },
 
 }
