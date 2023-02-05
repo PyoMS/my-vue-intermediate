@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     addOneItem(todoItem) {
-      let obj = {completed: false, item: todoItem,};
+      const obj = {completed: false, item: todoItem,};
       localStorage.setItem(todoItem, JSON.stringify(obj)); // 로컬스토리지 - MDN 참고
       this.todoItems.push(obj);
     },
@@ -53,10 +53,10 @@ export default {
     }
   },
   components: {
-    'TodoHeader': TodoHeader,
-    'TodoInput': TodoInput,
-    'TodoList': TodoList,
-    'TodoFooter': TodoFooter,
+    TodoHeader,
+    TodoInput,
+    TodoList,
+    TodoFooter,
   },
 
 }

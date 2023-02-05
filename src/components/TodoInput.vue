@@ -27,7 +27,7 @@ import Modal from './common/Modal'
 
 export default {
   name: "TodoInput",
-  data: function () {
+  data() {
     return {
       newTodoItem: "",
       showModal: false,
