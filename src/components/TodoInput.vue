@@ -36,7 +36,8 @@ export default {
   methods: {
     addTodo() {
       if (this.newTodoItem !== '') {
-        this.$emit('addTodoItem', this.newTodoItem); // $emit은 이벤트 발생. -> addTodoItem이라는 이벤트를 하위 컴포넌트에서 상위 컴포넌트로 발생시켰다.
+        // this.$emit('addTodoItem', this.newTodoItem); // $emit은 이벤트 발생. -> addTodoItem이라는 이벤트를 하위 컴포넌트에서 상위 컴포넌트로 발생시켰다.
+        this.$store.commit('addOneItem', this.newTodoItem.trim());
         this.clearInput();
         this.showModal = false;
       } else {
