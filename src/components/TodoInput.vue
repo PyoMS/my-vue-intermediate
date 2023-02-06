@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import Modal from './common/Modal'
+import customModal from './common/Modal'
 
 export default {
   name: "TodoInput",
@@ -48,8 +48,7 @@ export default {
     },
   },
   components: {
-    'customModal': Modal,
-
+    customModal,
   },
 }
 </script>
