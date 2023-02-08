@@ -22,8 +22,8 @@ const store = createStore({
             todoItems: storage.fetch(),
         }
     },
-    getters: getters,
-    mutations: mutations,
+    getters,
+    mutations
 
 })
 
